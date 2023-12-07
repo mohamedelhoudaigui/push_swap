@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:23:30 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/07 11:13:45 by mel-houd         ###   ########.fr       */
+/*   Updated: 2023/12/07 22:03:41 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ void	push_swap(int *data, int size)
 	stack_two->top = -1;
 	size--;
 	while (size >= 0)
-	{
-		stack_one->items[++stack_one->top] = data[size];
-		size--;
-	}
-	sort(&stack_one, &stack_two);
+		stack_one->items[++stack_one->top] = data[size--];
+	if (stack_one->top == 2)
+		sort_3(stack_one);
+	else if (stack_one->top == 4)
+		sort_5(stack_one, stack_two);
+	else
+		sort(stack_one, stack_two);
+	print_stack(stack_one);
 	free(stack_one->items);
 	free(stack_two->items);
 	free(stack_one);
@@ -50,16 +53,35 @@ int main(int ac, char **av)
 		char	*res;
 		int		**data;
 		int		dup;
+		int		sorted;
+		int		i;
 	
+		i = 0;
 		res = ft_parser(av, ac);
+		if (!res)
+		{
+			ft_printf("Error\n");
+			free(res);
+			return (1);
+		}
 		data = ft_convert_av(res);
-		dup = ft_check_dups(data[0], *data[1]);
-		if (!res || !data || dup == 1)
+		if (!data)
+		{
+			ft_printf("Error\n");
+			free(data);
+			return (1);
+		}
+		dup = ft_check_dups(data[0], *(data[1]));
+		if (dup == 1)
 		{
 			ft_printf("Error\n");
 			return (1);
 		}
+		sorted = ft_check_sorted(data[0], *(data[1]));
+		if (sorted == 0)
+			return (0);
 		push_swap(data[0], *(data[1]));
+		free(data);
 	}
 	return (0);
 }

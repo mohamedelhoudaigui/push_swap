@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 03:11:54 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/05 02:03:38 by mel-houd         ###   ########.fr       */
+/*   Updated: 2023/12/07 22:03:08 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,89 @@ void	print_stack(stack *stack)
 		ft_printf("%d\n", stack->items[i--]);
 }
 
-void	sort(stack **a_d, stack **b_d)
+void	sort_3(stack *a)
 {
-	stack	*a;
-	stack	*b;
+	if (a->items[2] < a->items[1] && a->items[1] < a->items[0])
+		return ;
+	if (a->items[2] < a->items[1] && a->items[2] < a->items[0])
+	{
+		rra(a);
+		sa(a);
+	}
+	else if (a->items[2] < a->items[1] && a->items[2] > a->items[0])
+		rra(a);
+	else if (a->items[2] > a->items[1] && a->items[2] < a->items[0])
+		sa(a);
+	else if (a->items[2] > a->items[1] && a->items[2] > a->items[0])
+	{
+		if (a->items[1] > a->items[0])
+		{
+			sa(a);
+			rra(a);
+		}
+		else
+		{
+			rra(a);
+			rra(a);
+		}
+	}
+}
 
-	a = *a_d;
-	b = *b_d;
+int	*find_min(int *data, int size)
+{
+	int	i;
+	int	*min;
+
+	i = 0;
+	min = (int *)malloc(sizeof(int) * 2);
+	if (!min)
+		return (NULL);
+	min[0] = data[0];
+	while (i <= size)
+	{
+		if (data[i] < min[0])
+		{
+			min[0] = data[i];
+			min[1] = i;
+		}
+		i++;
+	}
+	return (min);
+}
+
+void	sort_5(stack *a, stack *b)
+{
+	int	*min;
+
+	min = find_min(a->items, 4);
+	if (!min)
+		return ;
+	while (a->items[4] != min[0])
+	{
+		if (min[1] < 2)
+			rra(a);
+		else
+			ra(a);
+	}
+	pb(a, b);
+	free(min);
+	min = find_min(a->items, 3);
+	while (a->items[3] != min[0])
+	{
+		if (min[1] == 0)
+			rra(a);
+		else
+			ra(a);
+	}
+	free(min);
+	pb(a, b);
+	sort_3(a);
+	pa(b, a);
+	pa(b, a);
+}
+
+void	sort(stack *a, stack *b)
+{
 	while (a->top >= 0)
 	{
 		if (b->top == -1 || ((a->items[a->top]) > (b->items[b->top])))

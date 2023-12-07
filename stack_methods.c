@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 02:45:44 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/01 02:40:26 by mel-houd         ###   ########.fr       */
+/*   Updated: 2023/12/07 19:14:31 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void    pb(stack *a, stack *b)
 	ft_printf("pb\n");
 }
 
-void    ra(stack *a)
+void    rra(stack *a)
 {
 	int	tmp;
 	int	i;
@@ -80,10 +80,10 @@ void    ra(stack *a)
 			i++;
 		}
 	}
-	ft_printf("ra\n");
+	ft_printf("rra\n");
 }
 
-void    rb(stack *b)
+void    rrb(stack *b)
 {
 	int	tmp;
 	int	i;
@@ -99,16 +99,11 @@ void    rb(stack *b)
 			i++;
 		}
 	}
-	ft_printf("rb\n");
+	ft_printf("rrb\n");
 }
 
-void	rr(stack *a, stack *b)
-{
-	ra(a);
-	rb(b);
-}
 
-void	rra(stack *a)
+void	ra(stack *a)
 {
 	int	i;
 	int	tmp;
@@ -124,10 +119,10 @@ void	rra(stack *a)
 			i--;
 		}
 	}
-	ft_printf("rra\n");
+	ft_printf("ra\n");
 }
 
-void	rrb(stack *b)
+void	rb(stack *b)
 {
 	int	i;
 	int	tmp;
@@ -143,11 +138,17 @@ void	rrb(stack *b)
 			i--;
 		}
 	}
-	ft_printf("rrb\n");
+	ft_printf("rb\n");
 }
 
 void	rrr(stack *a, stack *b)
 {
 	rra(a);
 	rrb(b);
+}
+
+void	rr(stack *a, stack *b)
+{
+	ra(a);
+	rb(b);
 }

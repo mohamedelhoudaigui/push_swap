@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 05:20:31 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/07 11:08:16 by mel-houd         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:52:03 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_check_intruder(char *str)
 	
 	while (str[i])
 	{
-		if ((str[i] < '0' || str[i] > '9') && str[i] != ' ')
+		if ((str[i] < '0' || str[i] > '9') && str[i] != ' ' && str[i] != '-' && str[i] != '+')
 			return (1);
 		i++;
 	}
@@ -54,6 +54,8 @@ char	*ft_parser(char **av, int ac)
 	full_args = NULL;
 	while (i < ac)
 	{
+		if (av[i][0] == '\0')
+			return (NULL);
 		if (sw == 1)
 			full_args = ft_strjoin(full_args, " ");
 		sw = 1;
@@ -70,11 +72,12 @@ char	*ft_parser(char **av, int ac)
 
 int		**ft_convert_av(char *full_args)
 {
-	int		size;
-	int		**res;
-	int		*data;
-	int		i;
-	char	**splited;
+	int			size;
+	int			**res;
+	int			*data;
+	int			i;
+	char		**splited;
+	long long	tmp;
 
 	splited = ft_split(full_args, ' ');
 	if (!splited)
@@ -93,7 +96,10 @@ int		**ft_convert_av(char *full_args)
 	i = 0;
 	while (i < size)
 	{
-		data[i] = ft_atoi(splited[i]);
+		tmp = ft_atol(splited[i]);
+		if (tmp > 2147483647 || tmp < -2147483648)
+			return (NULL);
+		data[i] = (int)tmp;
 		i++;
 	}
 	res[0] = data;
@@ -110,7 +116,6 @@ int		ft_check_dups(int *data, int size)
 	int	j;
 
 	i = 0;
-	j = 1;
 	while (i < size)
 	{
 		j = i + 1;
