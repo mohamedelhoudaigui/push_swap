@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:23:30 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/06 15:12:23 by mel-houd         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:13:45 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ void	push_swap(int *data, int size)
 	stack_two->items = items2;
 	stack_one->top = -1;
 	stack_two->top = -1;
-	while (--size < 0)
+	size--;
+	while (size >= 0)
+	{
 		stack_one->items[++stack_one->top] = data[size];
+		size--;
+	}
 	sort(&stack_one, &stack_two);
 	free(stack_one->items);
 	free(stack_two->items);
@@ -55,7 +59,7 @@ int main(int ac, char **av)
 			ft_printf("Error\n");
 			return (1);
 		}
-		push_swap(data[0], *data[1]);
+		push_swap(data[0], *(data[1]));
 	}
 	return (0);
 }

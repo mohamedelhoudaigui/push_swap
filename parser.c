@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 05:20:31 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/06 15:12:56 by mel-houd         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:08:16 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,14 @@ int		ft_check_dups(int *data, int size)
 	int	i;
 	int	j;
 
-	j = 1;
 	i = 0;
+	j = 1;
 	while (i < size)
 	{
-		while (j < size - i)
+		j = i + 1;
+		while (j < size)
 		{
-			if (data[j] == data[i])
+			if (data[i] == data[j])
 				return (1);
 			j++;
 		}
