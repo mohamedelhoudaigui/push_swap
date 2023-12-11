@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:23:30 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/07 22:03:41 by mel-houd         ###   ########.fr       */
+/*   Updated: 2023/12/10 05:36:17 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	push_swap(int *data, int size)
 	stack	*stack_two;
 	int		*items1;
 	int		*items2;
+	int		i;
 
 	stack_one = (stack *)malloc(sizeof(stack));
 	stack_two = (stack *)malloc(sizeof(stack));
@@ -30,15 +31,19 @@ void	push_swap(int *data, int size)
 	stack_one->top = -1;
 	stack_two->top = -1;
 	size--;
-	while (size >= 0)
-		stack_one->items[++stack_one->top] = data[size--];
-	if (stack_one->top == 2)
+	i = 0;
+	while (i <= size)
+		stack_one->items[++stack_one->top] = data[i++];
+	if (stack_one->top == 1)
+		sa(stack_one);
+	else if (stack_one->top == 2)
 		sort_3(stack_one);
+	else if (stack_one->top == 3)
+		sort_45(stack_one, stack_two, 4);
 	else if (stack_one->top == 4)
-		sort_5(stack_one, stack_two);
+		sort_45(stack_one, stack_two, 5);
 	else
 		sort(stack_one, stack_two);
-	print_stack(stack_one);
 	free(stack_one->items);
 	free(stack_two->items);
 	free(stack_one);

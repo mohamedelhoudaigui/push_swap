@@ -25,7 +25,7 @@ SRCS = ./libft/printf/ft_printf.c \
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = push_swap
 

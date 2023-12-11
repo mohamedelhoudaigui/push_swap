@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:24:12 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/07 22:02:24 by mel-houd         ###   ########.fr       */
+/*   Updated: 2023/12/10 04:22:10 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "./libft/printf/ft_printf.h"
 # include "./libft/libft.h"
 # include <stdlib.h>
+# include <stdio.h>
 
 typedef struct
 {
@@ -26,7 +27,9 @@ typedef struct
 void    print_stack(stack *stack);
 void	sort(stack *a, stack *b);
 void	sort_3(stack *a);
-void	sort_5(stack *a, stack *b);
+void	sort_45(stack *a, stack *b, int variation);
+void	sort_array(int	*arr, int size);
+int		get_index(int *table, int size, int value);
 int		*find_min(int *data, int size);
 char	*ft_parser(char **av, int ac);
 int		ft_check_intruder(char *str);
