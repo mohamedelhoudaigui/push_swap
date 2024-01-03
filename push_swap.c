@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:23:30 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/10 05:36:17 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/03 06:01:42 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,27 @@
 
 void	push_swap(int *data, int size)
 {
-	stack	*stack_one;
-	stack	*stack_two;
-	int		*items1;
-	int		*items2;
-	int		i;
+	t_stack	*stack_one;
+	t_stack	*stack_two;
 
-	stack_one = (stack *)malloc(sizeof(stack));
-	stack_two = (stack *)malloc(sizeof(stack));
-	items1 = (int *)malloc(sizeof(int) * size);
-	items2 = (int *)malloc(sizeof(int) * size);
-	if (!stack_one || !stack_two || !items1 || !items2)
-		return ;
-	stack_one->items = items1;
-	stack_two->items = items2;
-	stack_one->top = -1;
-	stack_two->top = -1;
-	size--;
-	i = 0;
-	while (i <= size)
-		stack_one->items[++stack_one->top] = data[i++];
-	if (stack_one->top == 1)
-		sa(stack_one);
-	else if (stack_one->top == 2)
-		sort_3(stack_one);
-	else if (stack_one->top == 3)
-		sort_45(stack_one, stack_two, 4);
-	else if (stack_one->top == 4)
-		sort_45(stack_one, stack_two, 5);
-	else
-		sort(stack_one, stack_two);
-	free(stack_one->items);
-	free(stack_two->items);
-	free(stack_one);
-	free(stack_two);
+	stack_one = (t_stack *)ft_calloc(1, sizeof(t_stack));
+	stack_two = (t_stack *)ft_calloc(1, sizeof(t_stack));
+	init_stacks(stack_one, stack_two, size, data);
+
+	// if (stack_one->top == 1)
+	// 	sa(stack_one);
+	// else if (stack_one->top == 2)
+	// 	sort_3(stack_one);
+	// else if (stack_one->top == 3)
+	// 	sort_45(stack_one, stack_two, 4);
+	// else if (stack_one->top == 4)
+	// 	sort_45(stack_one, stack_two, 5);
+	// else
+	// 	sort(stack_one, stack_two);
+	// ss(stack_one, stack_two);
+	print_stack(stack_one);
+	ft_printf("\n");
+	print_stack(stack_two);
 	free(data);
 }
 

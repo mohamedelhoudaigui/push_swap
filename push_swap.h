@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:24:12 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/10 04:22:10 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/03 06:00:23 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,33 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-typedef struct
+typedef struct s_node
 {
-	int top;
-	int *items;
-}   stack;
+	int				value;
+	int				index;
+	int				cost;
+	int				cheap;
+	struct s_node	*next;
+	struct s_node	*prev;
+}				t_node;
 
-void    print_stack(stack *stack);
-void	sort(stack *a, stack *b);
-void	sort_3(stack *a);
-void	sort_45(stack *a, stack *b, int variation);
-void	sort_array(int	*arr, int size);
-int		get_index(int *table, int size, int value);
-int		*find_min(int *data, int size);
+typedef struct s_stack
+{
+	t_node	*items;
+	int		size;
+	int		top;
+}				t_stack;
+
+void	init_stacks(t_stack *a, t_stack *b, int size, int *data);
+t_node	*t_node_new(int value);
+t_node	*t_node_last(t_node *lst);
+void	t_node_add_back(t_node **lst, t_node *new);
+void	t_node_add_front(t_node **lst, t_node *new);
+
+void    print_stack(t_stack *stack);
+// void	sort_3(t_stack *a);
+// void	sort_45(t_stack *a, t_stack *b, int variation);
+// int		*find_min(int *data, int size);
 char	*ft_parser(char **av, int ac);
 int		ft_check_intruder(char *str);
 void	push_swap(int *data, int size);
@@ -39,16 +53,15 @@ void	ft_free_2d(char **av);
 int		ft_check_dups(int *data, int size);
 int		ft_check_sorted(int	*data, int size);
 
-void	sa(stack *a);
-void	sb(stack *b);
-void    ss(stack *a, stack *b);
-void    pa(stack *a, stack *b);
-void    pb(stack *a, stack *b);
-void    ra(stack *a);
-void    rb(stack *b);
-void	rr(stack *a, stack *b);
-void	rra(stack *a);
-void	rrb(stack *b);
-void	rrr(stack *a, stack *b);
+
+void	sa(t_stack *a);
+void	sb(t_stack *b);
+void	ss(t_stack *a, t_stack *b);
+void	pa(t_stack *a, t_stack *b);
+void	pb(t_stack *a, t_stack *b);
+void	ra(t_stack *a);
+void	rb(t_stack *b);
+void	rr(t_stack *a, t_stack *b);
+void	rra(t_stack *a);
 
 #endif

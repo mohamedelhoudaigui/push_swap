@@ -6,149 +6,212 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 02:45:44 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/07 19:14:31 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/03 06:00:01 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    sa(stack *a)
+void	print_stack(t_stack *stack)
 {
-	int tmp;
-	if (a->top > 0)
+	t_node *items;
+
+	if (!stack || !stack->items)
 	{
-		tmp = a->items[a->top];
-		a->items[a->top] = a->items[a->top - 1];
-		a->items[a->top - 1] = tmp;
+		ft_printf("empty stack\n");
+		return ;
 	}
+	items = stack->items;
+	while (items)
+	{
+		ft_printf("%d\n", items->value);
+		items = items->next;
+	}
+}
+
+void	init_stacks(t_stack *a, t_stack *b, int size, int *data)
+{
+	int		i;
+	t_node	*tmp;
+	t_node	*tmp2;
+
+	i = 0;
+	a->size = size;
+	b->size = size;
+	a->top = size - 1;
+	b->top = size - 1;
+	a->items = t_node_new(data[0]);
+	b->items = t_node_new(data[0]);
+	while (++i < size)
+	{
+		tmp = t_node_new(data[i]);
+		tmp2 = t_node_new(data[i]);
+		t_node_add_back(&a->items, tmp);
+		t_node_add_back(&b->items, tmp2);
+	}
+}
+
+void	sa(t_stack *a)
+{
+	t_node	*tmp;
+	t_node	*tmp_next;
+	t_node	*tmp_next_next;
+
+	if (a->size <= 1)
+		return ;
+	tmp = a->items;
+	tmp_next = tmp->next;
+	if (a->size == 2)
+	{
+		tmp_next->next = tmp;
+		tmp->next = NULL;
+	}
+	else
+	{
+		tmp_next_next = tmp_next->next;
+		tmp_next_next->prev = tmp;
+		tmp->next = tmp_next_next;
+		tmp_next->next = tmp;
+	}
+	tmp->prev = tmp_next;
+	tmp_next->prev = NULL;
+	a->items = tmp_next;
 	ft_printf("sa\n");
 }
 
-void    sb(stack *b)
+void	sb(t_stack *b)
 {
-	int tmp;
-	if (b->top > 0)
+	t_node	*tmp;
+	t_node	*tmp_next;
+	t_node	*tmp_next_next;
+
+	if (b->size <= 1)
+		return ;
+	tmp = b->items;
+	tmp_next = tmp->next;
+	if (b->size == 2)
 	{
-		tmp = b->items[b->top];
-		b->items[b->top] = b->items[b->top - 1];
-		b->items[b->top - 1] = tmp;
+		tmp_next->next = tmp;
+		tmp->next = NULL;
 	}
+	else
+	{
+		tmp_next_next = tmp_next->next;
+		tmp_next_next->prev = tmp;
+		tmp->next = tmp_next_next;
+		tmp_next->next = tmp;
+	}
+	tmp->prev = tmp_next;
+	tmp_next->prev = NULL;
+	b->items = tmp_next;
 	ft_printf("sb\n");
 }
 
-void    ss(stack *a, stack *b)
+void	ss(t_stack *a, t_stack *b)
 {
 	sa(a);
 	sb(b);
 }
 
-void    pa(stack *b, stack *a)
+void	pa(t_stack *a, t_stack *b)
 {
-	if (b->top > -1)
-	{
-		a->items[a->top + 1] = b->items[b->top];
-		a->top++;
-		b->top--;
-	}
+	t_node *head_a;
+	t_node *head_b;
+
+	if (b->size == 0 || b->items == NULL)
+		return ;
+	head_b = b->items;
+	head_a = a->items;
+	b->items = head_b->next;
+	head_b->next->prev = NULL;
+	head_b->next = NULL;
+	t_node_add_front(&a->items, head_b);
+	a->size++;
+	a->top++;
+	b->size--;
+	b->top--;
 	ft_printf("pa\n");
 }
 
-void    pb(stack *a, stack *b)
+void	pb(t_stack *a, t_stack *b)
 {
-	if (a->top > -1)
-	{
-		b->items[b->top + 1] = a->items[a->top];
-		b->top++;
-		a->top--;
-	}
+	t_node *head_a;
+	t_node *head_b;
+
+	if (a->size == 0 || a->items == NULL)
+		return ;
+	head_b = b->items;
+	head_a = a->items;
+	a->items = head_a->next;
+	head_a->next->prev = NULL;
+	head_a->next = NULL;
+	t_node_add_front(&b->items, head_a);
+	b->size++;
+	b->top++;
+	a->size--;
+	a->top--;
 	ft_printf("pb\n");
 }
 
-void    rra(stack *a)
+void	ra(t_stack *a)
 {
-	int	tmp;
-	int	i;
-	
-	i = 0;
-	if (a->top > 0)
-	{
-		while (i < a->top)
-		{
-			tmp = a->items[i];
-			a->items[i] = a->items[i + 1];
-			a->items[i + 1] = tmp;
-			i++;
-		}
-	}
-	ft_printf("rra\n");
-}
+	t_node	*head;
+	t_node	*tmp1;
+	t_node	*tmp2;
 
-void    rrb(stack *b)
-{
-	int	tmp;
-	int	i;
-	
-	i = 0;
-	if (b->top > 0)
-	{
-		while (i < b->top)
-		{
-			tmp = b->items[i];
-			b->items[i] = b->items[i + 1];
-			b->items[i + 1] = tmp;
-			i++;
-		}
-	}
-	ft_printf("rrb\n");
-}
-
-
-void	ra(stack *a)
-{
-	int	i;
-	int	tmp;
-
-	i = a->top;
-	if (a->top > 0)
-	{
-		while (i > 0)
-		{
-			tmp = a->items[i];
-			a->items[i] = a->items[i - 1];
-			a->items[i - 1] = tmp;
-			i--;
-		}
-	}
+	if (a->size < 2)
+		return ;
+	head = a->items;
+	tmp1 = head->next;
+	tmp2 = t_node_last(head);
+	tmp1->prev = NULL;
+	head->next = NULL;
+	tmp2->next = head;
+	head->prev = tmp2;
+	a->items = tmp1;
 	ft_printf("ra\n");
 }
 
-void	rb(stack *b)
+void	rb(t_stack *b)
 {
-	int	i;
-	int	tmp;
+	t_node	*head;
+	t_node	*tmp1;
+	t_node	*tmp2;
 
-	i = b->top;
-	if (b->top > 0)
-	{
-		while (i > 0)
-		{
-			tmp = b->items[i];
-			b->items[i] = b->items[i - 1];
-			b->items[i - 1] = tmp;
-			i--;
-		}
-	}
+	if (b->size < 2)
+		return ;
+	head = b->items;
+	tmp1 = head->next;
+	tmp2 = t_node_last(head);
+	tmp1->prev = NULL;
+	head->next = NULL;
+	tmp2->next = head;
+	head->prev = tmp2;
+	b->items = tmp1;
 	ft_printf("rb\n");
 }
 
-void	rrr(stack *a, stack *b)
-{
-	rra(a);
-	rrb(b);
-}
-
-void	rr(stack *a, stack *b)
+void	rr(t_stack *a, t_stack *b)
 {
 	ra(a);
 	rb(b);
+}
+
+void	rra(t_stack *a)
+{
+	t_node	*head;
+	t_node	*tmp1;
+	t_node	*tmp2;
+
+	if (a->size < 2)
+		return ;
+	head = a->items;
+	tmp1 = t_node_last(head);
+	tmp2 = tmp1->prev;
+	tmp2->next = NULL;
+	tmp1->next = head;
+	tmp1->prev = NULL;
+	head->prev = tmp1;
+	a->items = tmp1;
+	ft_printf("rra\n");
 }
