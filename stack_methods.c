@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 02:45:44 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/03 06:18:25 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/03 09:26:35 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,15 +131,22 @@ void	pa(t_stack *a, t_stack *b)
 {
 	t_node *head_a;
 	t_node *head_b;
+	t_node	*next_b;
 
-	if (b->size == 0 || b->items == NULL)
+	if (b->items == NULL)
 		return ;
 	head_b = b->items;
+	next_b = head_b->next;
 	head_a = a->items;
-	b->items = head_b->next;
-	head_b->next->prev = NULL;
+	if (next_b != NULL)
+		next_b->prev = NULL;
+	b->items = next_b;
+	a->items = head_b;
 	head_b->next = NULL;
-	t_node_add_front(&a->items, head_b);
+	head_b->next = head_a;
+	if (a->items->next != NULL)
+		head_a->prev = head_b;
+	head_b->prev = NULL;
 	a->size++;
 	a->top++;
 	b->size--;
@@ -147,23 +154,30 @@ void	pa(t_stack *a, t_stack *b)
 	ft_printf("pa\n");
 }
 
-void	pb(t_stack *a, t_stack *b)
+void pb(t_stack *a, t_stack *b)
 {
 	t_node *head_a;
 	t_node *head_b;
+	t_node *next_a;
 
-	if (a->size == 0 || a->items == NULL)
+	if (a->items == NULL)
 		return ;
-	head_b = b->items;
 	head_a = a->items;
-	a->items = head_a->next;
-	head_a->next->prev = NULL;
+	next_a = head_a->next;
+	head_b = b->items;
+	if (next_a != NULL)
+		next_a->prev = NULL;
+	a->items = next_a;
+	b->items = head_a;
 	head_a->next = NULL;
-	t_node_add_front(&b->items, head_a);
-	b->size++;
-	b->top++;
+	head_a->next = head_b;
+	if (b->items->next != NULL)
+		head_b->prev = head_a;
+	head_a->prev = NULL;
 	a->size--;
 	a->top--;
+	b->size++;
+	b->top++;
 	ft_printf("pb\n");
 }
 

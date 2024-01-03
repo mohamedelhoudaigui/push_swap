@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 02:23:59 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/03 04:57:59 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/03 08:27:18 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,17 @@ void	print_t_node(t_node *list)
 
 void	t_node_add_front(t_node **lst, t_node *new)
 {
+	t_node	*lst_p;
+
 	if (lst == NULL)
 		return ;
-	new->next = *lst;
-	new->prev = NULL;
-	new->next->prev = new;
-	*lst = new;
+	else if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		lst_p = *lst;
+		new->next = lst_p;
+		lst_p->prev = new;
+		*lst = new;
+	}
 }

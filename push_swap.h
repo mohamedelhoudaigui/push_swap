@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:24:12 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/03 06:21:27 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/03 09:30:39 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ void	t_node_add_front(t_node **lst, t_node *new);
 
 void    print_stack(t_stack *stack);
 void	sort_3(t_stack *a);
-// void	sort_45(t_stack *a, t_stack *b, int variation);
-// int		*find_min(int *data, int size);
+void	sort_4(t_stack *a, t_stack *b);
+void	sort_5(t_stack *a, t_stack *b);
+int		*find_min(t_node *head);
+void	push_min(t_stack *a, t_stack *b);
 
 char	*ft_parser(char **av, int ac);
 int		ft_check_intruder(char *str);

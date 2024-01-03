@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 03:11:54 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/03 06:32:15 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/03 09:29:39 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,109 @@
 
 void	sort_3(t_stack *a)
 {
-	t_node *node_0 = a->items;
-	t_node *node_1 = node_0->next;
-	t_node *node_2 = node_1->next;
+	t_node *node0 = a->items;
+	t_node *node1 = node0->next;
+	t_node *node2 = node1->next;
 
-	if (node_0->value < node_2)
+	if (node0->value < node1->value && node0->value < node2->value)
+	{
+		rra(a);
+		sa(a);
+	}
+	else if (node0->value < node1->value && node0->value > node2->value)
+		rra(a);
+	else if (node0->value > node1->value && node0->value < node2->value)
+		sa(a);
+	else if (node0->value > node1->value && node0->value > node2->value)
+	{
+		if (node1->value < node2->value)
+		{
+			rra(a);
+			rra(a);
+		}
+		else if (node1->value > node2->value)
+		{
+			sa(a);
+			rra(a);
+		}
+	}
 }
 
-// int		*find_min(int *data, int size)
-// {
-// 	int	i;
-// 	int	*min;
+int	*find_min(t_node *head)
+{
+	int		*min;
+	int		i;
+	t_node	*tmp;
 
-// 	i = 0;
-// 	min = (int *)malloc(sizeof(int) * 2);
-// 	if (!min)
-// 		return (NULL);
-// 	min[0] = data[size];
-// 	min[1] = size;
-// 	while (i <= size)
-// 	{
-// 		if (data[i] < min[0])
-// 		{
-// 			min[0] = data[i];
-// 			min[1] = i;
-// 		}
-// 		i++;
-// 	}
-// 	return (min);
+    if (!head)
+        return NULL;
+	min = (int *)malloc(sizeof(int) * 2);
+	if (!min)
+		return (NULL);
+    min[0] = head->value;
+    min[1] = 0;
+    i = 0;
+    tmp = head;
+    while (tmp)
+	{
+        if (tmp->value < min[0])
+		{
+            min[0] = tmp->value;
+            min[1] = i;
+        }
+        tmp = tmp->next;
+        i++;
+    }
+    return min;
+}
+
+void	push_min(t_stack *a, t_stack *b)
+{
+	int		*min;
+	t_node	*head;
+
+	head = a->items;
+	if (head == NULL)
+		return ;
+	min = find_min(a->items);
+	if (!min)
+		return ;
+	while (head->value != min[0])
+	{
+		if (min[1] == 1 || min[1] == 2)
+			ra(a);
+		else if (min[1] == 3 || min[1] == 4)
+			rra(a);
+		head = a->items;
+	}
+	pb(a, b);
+	free(min);
+}
+
+void	sort_5(t_stack *a, t_stack *b)
+{
+	push_min(a, b);
+	push_min(a, b);
+	sort_3(a);
+	pa(a, b);
+	pa(a, b);
+}
+
+void	sort_4(t_stack *a, t_stack *b)
+{
+	push_min(a, b);
+	sort_3(a);
+	pa(a, b);
+}
+
+// void	sort_4(t_stack *a, t_stack *b)
+// {
+// 	push_min(a, b);
+// 	sort_3(a);
+// 	pa(a, b);
 // }
 
-// void sort_45(t_stack *a, t_stack *b, int variation)
+// void sort_5(t_stack *a, t_stack *b)
 // {
 // 	int	*min;
 
