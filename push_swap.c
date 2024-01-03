@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:23:30 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/03 06:01:42 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/03 06:27:43 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,23 @@
 
 void	push_swap(int *data, int size)
 {
-	t_stack	*stack_one;
-	t_stack	*stack_two;
+	t_stack	*a;
+	t_stack	*b;
 
-	stack_one = (t_stack *)ft_calloc(1, sizeof(t_stack));
-	stack_two = (t_stack *)ft_calloc(1, sizeof(t_stack));
-	init_stacks(stack_one, stack_two, size, data);
-
-	// if (stack_one->top == 1)
-	// 	sa(stack_one);
-	// else if (stack_one->top == 2)
-	// 	sort_3(stack_one);
-	// else if (stack_one->top == 3)
-	// 	sort_45(stack_one, stack_two, 4);
-	// else if (stack_one->top == 4)
-	// 	sort_45(stack_one, stack_two, 5);
-	// else
-	// 	sort(stack_one, stack_two);
-	// ss(stack_one, stack_two);
-	print_stack(stack_one);
+	a = (t_stack *)ft_calloc(1, sizeof(t_stack));
+	b = (t_stack *)ft_calloc(1, sizeof(t_stack));
+	init_stacks(a, b, size, data);
+	print_stack(a);
+	if (a->size == 2)
+		sa(a);
+	else if (a->size == 3)
+	{
+		sort_3(a);
+	}
 	ft_printf("\n");
-	print_stack(stack_two);
+	print_stack(a);
+	free_stack(a);
+	free_stack(b);
 	free(data);
 }
 

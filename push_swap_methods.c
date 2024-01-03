@@ -6,36 +6,20 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 03:11:54 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/03 02:36:09 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/03 06:32:15 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// void	sort_3(t_stack *a)
-// {
-// 	if (a->items[2] < a->items[1] && a->items[1] < a->items[0])
-// 		return ;
-//     if (a->items[2] < a->items[1] && a->items[2] < a->items[0])
-// 	{
-// 		rra(a);
-// 		sa(a);
-// 	}
-// 	else if (a->items[2] > a->items[1] && a->items[2] < a->items[0])
-// 		sa(a);
-// 	else if (a->items[2] < a->items[1] && a->items[2] > a->items[0])
-// 		rra(a);
-// 	else if (a->items[2] > a->items[1] && a->items[2] > a->items[0])
-// 	{
-// 		if (a->items[1] > a->items[0])
-// 		{
-// 			sa(a);
-// 			rra(a);
-// 		}
-// 		else if (a->items[1] < a->items[0])
-// 			ra(a);
-// 	}
-// }
+void	sort_3(t_stack *a)
+{
+	t_node *node_0 = a->items;
+	t_node *node_1 = node_0->next;
+	t_node *node_2 = node_1->next;
+
+	if (node_0->value < node_2)
+}
 
 // int		*find_min(int *data, int size)
 // {

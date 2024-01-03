@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 02:45:44 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/03 06:00:01 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/03 06:18:25 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,39 @@ void	print_stack(t_stack *stack)
 	}
 }
 
+void	free_stack(t_stack *stack)
+{
+	t_node	*lst1;
+	t_node	*tmp;
+	
+	lst1 = stack->items;
+	while (lst1)
+	{
+		tmp = lst1->next;
+		free(lst1);
+		lst1 = tmp;
+	}
+	stack->items = NULL;
+	free(stack);
+	stack = NULL;
+}
+
 void	init_stacks(t_stack *a, t_stack *b, int size, int *data)
 {
 	int		i;
 	t_node	*tmp;
-	t_node	*tmp2;
 
 	i = 0;
 	a->size = size;
-	b->size = size;
+	b->size = 0;
 	a->top = size - 1;
-	b->top = size - 1;
-	a->items = t_node_new(data[0]);
-	b->items = t_node_new(data[0]);
-	while (++i < size)
+	b->top = -1;
+	while (i < size)
 	{
 		tmp = t_node_new(data[i]);
-		tmp2 = t_node_new(data[i]);
+		tmp->index = i;
 		t_node_add_back(&a->items, tmp);
-		t_node_add_back(&b->items, tmp2);
+		i++;
 	}
 }
 
@@ -57,7 +71,7 @@ void	sa(t_stack *a)
 	t_node	*tmp_next;
 	t_node	*tmp_next_next;
 
-	if (a->size <= 1)
+	if (a->size < 2)
 		return ;
 	tmp = a->items;
 	tmp_next = tmp->next;
@@ -85,7 +99,7 @@ void	sb(t_stack *b)
 	t_node	*tmp_next;
 	t_node	*tmp_next_next;
 
-	if (b->size <= 1)
+	if (b->size < 2)
 		return ;
 	tmp = b->items;
 	tmp_next = tmp->next;
@@ -214,4 +228,29 @@ void	rra(t_stack *a)
 	head->prev = tmp1;
 	a->items = tmp1;
 	ft_printf("rra\n");
+}
+
+void	rrb(t_stack *b)
+{
+	t_node	*head;
+	t_node	*tmp1;
+	t_node	*tmp2;
+
+	if (b->size < 2)
+		return ;
+	head = b->items;
+	tmp1 = t_node_last(head);
+	tmp2 = tmp1->prev;
+	tmp2->next = NULL;
+	tmp1->next = head;
+	tmp1->prev = NULL;
+	head->prev = tmp1;
+	b->items = tmp1;
+	ft_printf("rrb\n");
+}
+
+void	rrr(t_stack *a, t_stack *b)
+{
+	rra(a);
+	rrb(b);
 }
