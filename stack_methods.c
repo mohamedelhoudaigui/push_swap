@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 02:45:44 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/03 09:26:35 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/04 06:10:03 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ void	print_stack(t_stack *stack)
 		return ;
 	}
 	items = stack->items;
+	ft_printf("\n");
 	while (items)
 	{
-		ft_printf("%d\n", items->value);
+		ft_printf("value : %d addr : %p cost : %d\n", items->value, items, items->cost);
 		items = items->next;
 	}
+	ft_printf("\n");
 }
 
 void	free_stack(t_stack *stack)
@@ -50,8 +52,10 @@ void	init_stacks(t_stack *a, t_stack *b, int size, int *data)
 {
 	int		i;
 	t_node	*tmp;
+	int		med;
 
 	i = 0;
+	med = size / 2;
 	a->size = size;
 	b->size = 0;
 	a->top = size - 1;
@@ -60,6 +64,12 @@ void	init_stacks(t_stack *a, t_stack *b, int size, int *data)
 	{
 		tmp = t_node_new(data[i]);
 		tmp->index = i;
+		tmp->target_node = NULL;
+		if (i <= med)
+			tmp->cost = i;
+		else
+			tmp->cost = size - i;
+		tmp->cheap = false;
 		t_node_add_back(&a->items, tmp);
 		i++;
 	}
@@ -90,7 +100,6 @@ void	sa(t_stack *a)
 	tmp->prev = tmp_next;
 	tmp_next->prev = NULL;
 	a->items = tmp_next;
-	ft_printf("sa\n");
 }
 
 void	sb(t_stack *b)
@@ -118,13 +127,13 @@ void	sb(t_stack *b)
 	tmp->prev = tmp_next;
 	tmp_next->prev = NULL;
 	b->items = tmp_next;
-	ft_printf("sb\n");
 }
 
 void	ss(t_stack *a, t_stack *b)
 {
 	sa(a);
 	sb(b);
+	ft_printf("ss");
 }
 
 void	pa(t_stack *a, t_stack *b)
@@ -197,7 +206,6 @@ void	ra(t_stack *a)
 	tmp2->next = head;
 	head->prev = tmp2;
 	a->items = tmp1;
-	ft_printf("ra\n");
 }
 
 void	rb(t_stack *b)
@@ -216,13 +224,13 @@ void	rb(t_stack *b)
 	tmp2->next = head;
 	head->prev = tmp2;
 	b->items = tmp1;
-	ft_printf("rb\n");
 }
 
 void	rr(t_stack *a, t_stack *b)
 {
 	ra(a);
 	rb(b);
+	ft_printf("rr\n");
 }
 
 void	rra(t_stack *a)
@@ -241,7 +249,6 @@ void	rra(t_stack *a)
 	tmp1->prev = NULL;
 	head->prev = tmp1;
 	a->items = tmp1;
-	ft_printf("rra\n");
 }
 
 void	rrb(t_stack *b)
@@ -260,11 +267,11 @@ void	rrb(t_stack *b)
 	tmp1->prev = NULL;
 	head->prev = tmp1;
 	b->items = tmp1;
-	ft_printf("rrb\n");
 }
 
 void	rrr(t_stack *a, t_stack *b)
 {
 	rra(a);
 	rrb(b);
+	ft_printf("rrr\n");
 }

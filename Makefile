@@ -11,6 +11,10 @@ SRCS = ./libft/printf/ft_printf.c \
 	   parser.c \
 	   check_sorted.c \
 	   linked_list.c \
+	   sort_stack.c \
+	   big_sort.c \
+	   algo_in.c \
+	   algo_out.c \
        ./libft/ft_isalpha.c ./libft/ft_isprint.c ./libft/ft_memcmp.c  ./libft/ft_putchar_fd.c ./libft/ft_split.c \
 	./libft/ft_strlcat.c ./libft/ft_strncmp.c ./libft/ft_substr.c ./libft/ft_atoi.c ./libft/ft_isalnum.c \
 	./libft/ft_itoa.c ./libft/ft_memcpy.c  ./libft/ft_putendl_fd.c ./libft/ft_strchr.c  ./libft/ft_strlcpy.c \

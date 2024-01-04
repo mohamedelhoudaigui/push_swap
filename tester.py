@@ -3,7 +3,7 @@ import random
 
 n_tests = int(input("Enter the number of tests: "))
 n_numbers = int(input("Enter the number of numbers: "))
-threshold = 500  # Adjust this threshold as needed
+threshold = 12  # Adjust this threshold as needed
 
 for _ in range(n_tests):
     rand_ints = random.sample(range(-2147483648, 2147483647), n_numbers)
