@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:22:03 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/04 01:51:13 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:39:32 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	sort_3(t_stack *a)
 	t_node *node1 = node0->next;
 	t_node *node2 = node1->next;
 
+	if (node0->value < node1->value && node1->value < node2->value)
+		return ;
 	if (node0->value < node1->value && node0->value < node2->value)
 	{
 		rra(a);

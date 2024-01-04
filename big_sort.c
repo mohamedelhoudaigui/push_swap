@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:27:12 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/04 06:09:34 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:33:08 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,26 @@ t_node	*get_biggest(t_stack *stack)
 		stack_list = stack_list->next;
 	}
 	return (biggest_node);
+}
+
+t_node	*get_smallest(t_stack *stack)
+{
+	t_node	*stack_list;
+	int		small;
+	t_node	*small_node;
+
+	stack_list = stack->items;
+	small = INT32_MAX;
+	while (stack_list)
+	{
+		if (stack_list->value < small)
+		{
+			small = stack_list->value;
+			small_node = stack_list;
+		}
+		stack_list = stack_list->next;
+	}
+	return (small_node);
 }
 
 t_node	*check_no_target(t_stack *a)
@@ -72,20 +92,37 @@ void	clear_target(t_stack *a, t_stack *b)
 	}
 }
 
+void	finish_touch(t_stack *a)
+{
+	t_node	*a_list;
+	t_node	*smallest;
+
+	a_list = a->items;
+	smallest = get_smallest(a);
+	while (a_list->value != smallest->value)
+	{
+		if (smallest->index <= a->size / 2)
+		{
+			ra(a);
+			ft_printf("ra\n");
+		}
+		else
+		{
+			rra(a);
+			ft_printf("rra\n");
+		}
+		a_list = a->items;
+	}
+}
+
 
 void	turk_algo(t_stack *a, t_stack *b)
 {
-	t_node	*a_list;
-	t_node	*b_list;
-	int		i;
-
-	a_list = a->items;
-	b_list = b->items;
-	i = 0;
 	init_turk(a, b);
 	algo_in(a, b);
-	sort_3(a);
+	sort_5(a, b);
 	clear_target(a, b);
 	algo_out(a, b);
-	// clear_target(a, b);
+	clear_target(a, b);
+	finish_touch(a);
 }

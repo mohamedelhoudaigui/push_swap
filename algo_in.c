@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 04:56:27 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/04 05:44:35 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:32:46 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,23 +138,35 @@ void	movement_of_nodes(t_stack *a, t_stack *b)
 			if (target->index <= mid_b)
 				rr(a, b);
 			else
+			{
 				ra(a);
+				ft_printf("ra\n");
+			}
 		}
 		else if (cheap_node->index > mid_a)
 		{
 			if (target->index > mid_b)
 				rrr(a, b);
 			else
+			{
 				rra(a);
+				ft_printf("rra\n");
+			}
 		}
 		a_list = a->items;
 	}
 	while (b_list->value != target->value)
 	{
 		if (target->index <= mid_b)
+		{
 			rb(b);
+			ft_printf("rb\n");
+		}
 		else
+		{
 			rrb(b);
+			ft_printf("rrb\n");
+		}
 		b_list = b->items;
 	}
 	pb(a, b);
@@ -164,12 +176,30 @@ void	movement_of_nodes(t_stack *a, t_stack *b)
 
 void	algo_in(t_stack *a, t_stack *b)
 {
-	while (a->size > 3)
+	t_node	*biggest;
+	t_node	*list_b;
+
+	while (a->size > 5)
 	{
 		index_cost(a, b);
 		calculate_target(a, b);
 		calculate_cost_action(a, b);
 		movement_of_nodes(a, b);
 	}
-	
+	biggest = get_biggest(b);
+	list_b = b->items;
+	while (list_b->value != biggest->value)
+	{
+		if (biggest->index <= b->size / 2)
+		{
+			rb(b);
+			ft_printf("rb\n");
+		}
+		else
+		{
+			rrb(b);
+			ft_printf("rrb\n");
+		}
+		list_b = b->items;
+	}
 }
