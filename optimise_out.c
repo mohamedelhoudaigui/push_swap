@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 00:36:09 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/05 04:42:10 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/05 05:48:30 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,39 @@ int     *find_5_largest(int arr[], int size)
         return (result);
 }
 
-int     check_exist(int *big_5, int value)
+int *find_3_largest(int arr[], int size)
+{
+    int *result = (int *)malloc(sizeof(int) * 3);
+    if (!result)
+        return NULL;
+
+    for (int i = 0; i < 3; i++)
+        result[i] = INT32_MIN;
+
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (arr[i] > result[j])
+            {
+                for (int k = 2; k > j; k--)
+                    result[k] = result[k - 1];
+                result[j] = arr[i];
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+int     check_exist(int *big_3, int value)
 {
     int     i;
 
     i = 0;
-	while (i < 5)
+	while (i < 3)
 	{
-		if (big_5[i] == value)
+		if (big_3[i] == value)
 			return (1);
 		i++;
 	}

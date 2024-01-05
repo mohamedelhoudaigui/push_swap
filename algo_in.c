@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 04:56:27 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/05 05:02:17 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/05 06:24:52 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	calculate_cost_action(t_stack **a_p, t_stack **b_p, int *big_5)
 	int		cost;
 	int		old_cost;
 	t_node	*cheap_node;
-	int		median;
 
 	a = *a_p;
 	b = *b_p;
@@ -123,10 +122,9 @@ void	calculate_cost_action(t_stack **a_p, t_stack **b_p, int *big_5)
 	b_list = b->items;
 	old_cost = INT32_MAX;
 	cost = INT32_MAX;
-	median = get_median(a);
 	while (a_list)
 	{
-		if (check_exist(big_5, a_list->value) == 0 && a_list->value < median)
+		if (check_exist(big_5, a_list->value) == 0)
 		{
 			target = a_list->target_node;
 			if (target != NULL)
@@ -141,7 +139,6 @@ void	calculate_cost_action(t_stack **a_p, t_stack **b_p, int *big_5)
 		}
 		a_list = a_list->next;
 	}
-	// ft_printf("cheap_node = %d median is = %d\n", cheap_node->value, median);
 	if (cheap_node != NULL) 
 		cheap_node->cheap = true;
 }
@@ -175,26 +172,26 @@ void	movement_of_nodes(t_stack **a_p, t_stack **b_p)
 	target = cheap_node->target_node;
 	a_list = a->items;
 	b_list = b->items;
-	while (a_list->value != cheap_node->value)
+	while (b_list->value != target->value)
 	{
-		if (cheap_node->index <= mid_a)
+		if (target->index <= mid_b)
 		{
-			if (b_list->value != target->value && target->index <= mid_b)
+			if (a_list->value != cheap_node->value && cheap_node->index <= mid_a)
 				rr(a,b);
 			else
 			{
-				ra(a);
-				ft_printf("ra\n");
+				rb(b);
+				ft_printf("rb\n");
 			}
 		}
-		else if (cheap_node->index > mid_a)
+		else if (target->index > mid_b)
 		{
-			if (b_list->value != target->value && target->index > mid_b)
+			if (a_list->value != cheap_node->value && cheap_node->index > mid_a)
 				rrr(a, b);
 			else
 			{
-				rra(a);
-				ft_printf("rra\n");
+				rrb(b);
+				ft_printf("rrb\n");
 			}
 		}
 		a_list = a->items;
@@ -223,7 +220,7 @@ void	movement_of_nodes(t_stack **a_p, t_stack **b_p)
 
 void	algo_in(t_stack *a, t_stack *b, int *big_5)
 {
-	while (a->size > 5)
+	while (a->size > 3)
 	{
 		index_cost(&a, &b);
 		calculate_target(&a, &b, big_5);

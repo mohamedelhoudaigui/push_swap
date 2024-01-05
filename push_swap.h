@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:24:12 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/05 04:48:02 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/05 06:18:53 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_stack
 
 int 	*make_array(t_stack *head);
 int     *find_5_largest(int arr[], int size);
+int		*find_3_largest(int arr[], int size);
 int     check_exist(int *big_5, int value);
 
 void	init_stacks(t_stack *a, t_stack *b, int size, int *data);
@@ -53,7 +54,7 @@ void	sort_3(t_stack *a);
 void	sort_4(t_stack *a, t_stack *b);
 void	sort_5(t_stack *a, t_stack *b);
 
-void	init_turk(t_stack *a, t_stack *b, int *big_5);
+void	init_turk(t_stack *a, t_stack *b, int *big_3);
 void	clear_target(t_stack *a, t_stack *b);
 void	turk_algo(t_stack *a, t_stack *b);
 void	calculate_target(t_stack **a_p, t_stack **b_p, int *big_5);
@@ -63,6 +64,10 @@ void	movement_of_nodes(t_stack **a_p, t_stack **b_p);
 void	algo_in(t_stack *a, t_stack *b, int *big_5);
 void	finish_touch_in(t_stack *b);
 int		*get_big_5(t_stack *a);
+int		*get_big_3(t_stack *a);
+
+int 	*find2_min(int arr[], int size);
+int		*get_min_2(t_stack *a);
 
 void 	bubble_sort(int arr[], int n);
 void 	swap(int *xp, int *yp);

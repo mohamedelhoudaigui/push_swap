@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:27:12 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/05 05:00:30 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/05 06:20:43 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,10 @@ void	init_turk(t_stack *a, t_stack *b, int *big_5)
 {
 	t_node	*a_list;
 	int		i;
-	int		max_to_b;
 
 	a_list = a->items;
 	i = 0;
-	if (a->size == 6)
-		max_to_b = 1;
-	else
-		max_to_b = 2;
-	while (a_list && i < max_to_b)
+	while (a_list && i < 2)
 	{
 		if (check_exist(big_5, a_list->value) == 0)
 		{
@@ -155,6 +150,21 @@ int		*get_big_5(t_stack *a)
 	return (big_5);
 }
 
+int		*get_big_3(t_stack *a)
+{
+	int		*arr;
+	int		*big_3;
+
+	arr = make_array(a);
+	if (!arr)
+		return (NULL);
+	big_3 = find_3_largest(arr, a->size);
+	free(arr);
+	if (!big_3)
+		return (NULL);
+	return (big_3);
+}
+
 void	turk_algo(t_stack *a, t_stack *b)
 {
 	int	*big_5;
@@ -164,7 +174,7 @@ void	turk_algo(t_stack *a, t_stack *b)
 		return ;
 	init_turk(a, b, big_5);
 	algo_in(a, b, big_5);
-	sort_5(a, b);
+	sort_3(a);
 	algo_out(a, b);
 	while (b->size > 0)
 		pa(a, b);
