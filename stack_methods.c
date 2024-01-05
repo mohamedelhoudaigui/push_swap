@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 02:45:44 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/04 08:36:57 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/05 03:56:16 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_stack(t_stack *stack)
 	ft_printf("\n");
 	while (items)
 	{
-		ft_printf("value : %d addr : %p target : %p\n", items->value, items, items->target_node, items->cheap);
+		ft_printf("value : %d addr : %p target : %p cheap : %d\n", items->value, items, items->target_node, items->cheap);
 		items = items->next;
 	}
 	ft_printf("\n");

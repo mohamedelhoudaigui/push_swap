@@ -6,34 +6,59 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:27:12 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/04 10:33:08 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/05 05:00:30 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	init_turk(t_stack *a, t_stack *b)
+void	init_turk(t_stack *a, t_stack *b, int *big_5)
 {
-	pb(a, b);
-	pb(a, b);
+	t_node	*a_list;
+	int		i;
+	int		max_to_b;
+
+	a_list = a->items;
+	i = 0;
+	if (a->size == 6)
+		max_to_b = 1;
+	else
+		max_to_b = 2;
+	while (a_list && i < max_to_b)
+	{
+		if (check_exist(big_5, a_list->value) == 0)
+		{
+			pb(a, b);
+			i += 1;
+		}
+		else
+		{
+			ra(a);
+			ft_printf("ra\n");
+		}
+		a_list = a->items;
+	}
 }
 
-t_node	*get_biggest(t_stack *stack)
+t_node	*get_biggest(t_stack **stack_p)
 {
-	t_node	*stack_list;
-	int		bigest;
+	t_stack	*stack;
+	t_node	*t_list;
 	t_node	*biggest_node;
+	int		biggest;
 
-	stack_list = stack->items;
-	bigest = INT32_MIN;
-	while (stack_list)
+	biggest_node = NULL;
+	stack = *stack_p;
+	t_list = stack->items;
+	biggest = INT32_MIN;
+	while (t_list)
 	{
-		if (stack_list->value > bigest)
+		if (t_list->value > biggest)
 		{
-			bigest = stack_list->value;
-			biggest_node = stack_list;
+			biggest_node = t_list;
+			biggest = biggest_node->value;
 		}
-		stack_list = stack_list->next;
+		t_list = t_list->next;
 	}
 	return (biggest_node);
 }
@@ -58,14 +83,14 @@ t_node	*get_smallest(t_stack *stack)
 	return (small_node);
 }
 
-t_node	*check_no_target(t_stack *a)
+t_node	*check_no_target(t_stack *a, int *big_5)
 {
 	t_node	*a_list;
 	
 	a_list = a->items;
 	while (a_list)
 	{
-		if (a_list->target_node == NULL)
+		if (a_list->target_node == NULL && check_exist(big_5, a_list->value) == 0)
 			return (a_list);
 		a_list = a_list->next;
 	}
@@ -115,14 +140,32 @@ void	finish_touch(t_stack *a)
 	}
 }
 
+int		*get_big_5(t_stack *a)
+{
+	int		*arr;
+	int		*big_5;
+
+	arr = make_array(a);
+	if (!arr)
+		return (NULL);
+	big_5 = find_5_largest(arr, a->size);
+	free(arr);
+	if (!big_5)
+		return (NULL);
+	return (big_5);
+}
 
 void	turk_algo(t_stack *a, t_stack *b)
 {
-	init_turk(a, b);
-	algo_in(a, b);
+	int	*big_5;
+
+	big_5 = get_big_5(a);
+	if (big_5 == NULL)
+		return ;
+	init_turk(a, b, big_5);
+	algo_in(a, b, big_5);
 	sort_5(a, b);
-	clear_target(a, b);
 	algo_out(a, b);
-	clear_target(a, b);
-	finish_touch(a);
+	while (b->size > 0)
+		pa(a, b);
 }

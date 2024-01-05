@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:23:30 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/04 10:28:43 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/05 04:59:06 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	push_swap(int *data, int size)
 	b = (t_stack *)ft_calloc(1, sizeof(t_stack));
 	init_stacks(a, b, size, data);
 	sort_stack(a, b);
+	// print_stack(a);
+	// print_stack(b);
 	free_stack(a);
 	free_stack(b);
 	free(data);

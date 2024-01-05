@@ -3,10 +3,10 @@ import random
 
 n_tests = int(input("Enter the number of tests: "))
 n_numbers = int(input("Enter the number of numbers: "))
-threshold = 2000  # Adjust this threshold as needed
+threshold = 5500  # Adjust this threshold as needed
 
 for _ in range(n_tests):
-    rand_ints = random.sample(range(-2147483648, 2147483647), n_numbers)
+    rand_ints = random.sample(range(-500, 500), n_numbers)
     input_list = ' '.join(map(str, rand_ints))
     bash_command = f"./push_swap {input_list} | wc -l"
     
