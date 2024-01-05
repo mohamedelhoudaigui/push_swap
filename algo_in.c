@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 04:56:27 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/05 06:24:52 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/05 06:27:05 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,19 +197,19 @@ void	movement_of_nodes(t_stack **a_p, t_stack **b_p)
 		a_list = a->items;
 		b_list = b->items;
 	}
-	while (b_list->value != target->value)
+	while (a_list->value != cheap_node->value)
 	{
-		if (target->index <= mid_b)
+		if (cheap_node->index <= mid_a)
 		{
-			rb(b);
-			ft_printf("rb\n");
+			ra(a);
+			ft_printf("ra\n");
 		}
 		else
 		{
-			rrb(b);
-			ft_printf("rrb\n");
+			rra(a);
+			ft_printf("rra\n");
 		}
-		b_list = b->items;
+		a_list = a->items;
 	}
 	a_list = a->items;
 	b_list = b->items;
