@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_methods.c                                :+:      :+:    :+:   */
+/*   find_min.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 03:11:54 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/04 01:52:37 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:03:09 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,26 @@ int	*find_min(t_node *head)
 	int		i;
 	t_node	*tmp;
 
-    if (!head)
-        return NULL;
+	if (!head)
+		return (NULL);
 	min = (int *)malloc(sizeof(int) * 2);
 	if (!min)
 		return (NULL);
-    min[0] = head->value;
-    min[1] = 0;
-    i = 0;
-    tmp = head;
-    while (tmp)
+	min[0] = head->value;
+	min[1] = 0;
+	i = 0;
+	tmp = head;
+	while (tmp)
 	{
-        if (tmp->value < min[0])
+		if (tmp->value < min[0])
 		{
-            min[0] = tmp->value;
-            min[1] = i;
-        }
-        tmp = tmp->next;
-        i++;
-    }
-    return min;
+			min[0] = tmp->value;
+			min[1] = i;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (min);
 }
 
 void	push_min(t_stack *a, t_stack *b)
@@ -67,4 +67,19 @@ void	push_min(t_stack *a, t_stack *b)
 	}
 	pb(a, b);
 	free(min);
+}
+
+t_node	*check_no_target(t_stack *a, int *big_5)
+{
+	t_node	*a_list;
+
+	a_list = a->items;
+	while (a_list)
+	{
+		if (a_list->target_node == NULL
+			&& check_exist(big_5, a_list->value) == 0)
+			return (a_list);
+		a_list = a_list->next;
+	}
+	return (NULL);
 }

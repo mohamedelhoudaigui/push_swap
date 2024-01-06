@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 02:23:59 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/03 08:27:18 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/06 04:01:47 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,25 @@ t_node	*t_node_last(t_node *lst)
 	return (p);
 }
 
-void t_node_add_back(t_node **lst, t_node *new)
+void	t_node_add_back(t_node **lst, t_node *new)
 {
-    t_node *tmp;
+	t_node	*tmp;
 
-    if (lst && new)
-    {
-        if (*lst == NULL)
-        {
-            *lst = new;
+	if (lst && new)
+	{
+		if (*lst == NULL)
+		{
+			*lst = new;
 			new->next = NULL;
-            new->prev = NULL; // Set prev to NULL for the first node
-        }
-        else
-        {
-            tmp = t_node_last(*lst);
-            tmp->next = new;
-            new->prev = tmp; // Set the previous node for the new node
-        }
-    }
+			new->prev = NULL;
+		}
+		else
+		{
+			tmp = t_node_last(*lst);
+			tmp->next = new;
+			new->prev = tmp;
+		}
+	}
 }
 
 void	print_t_node(t_node *list)

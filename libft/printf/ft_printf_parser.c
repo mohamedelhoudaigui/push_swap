@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:14:49 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/11/17 11:05:13 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:44:47 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ void	regular_cases(const char *s, int *i, int *res, va_list args)
 		ft_print_hex(va_arg(args, int), 'X', res);
 	else if (s[*i + 1] == '%')
 		ft_putchar('%', res);
-	*i += 2; 
+	*i += 2;
 }

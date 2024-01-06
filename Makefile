@@ -6,16 +6,25 @@ SRCS = ./libft/printf/ft_printf.c \
        ./libft/printf/ft_printf_parser.c \
        ./libft/printf/ft_printf_str.c \
        push_swap.c \
-       stack_methods.c \
-       push_swap_methods.c \
+       stack_methods_1.c \
+	   stack_methods_2.c \
+	   stack_methods_3.c \
+       find_min.c \
 	   parser.c \
 	   check_sorted.c \
 	   linked_list.c \
 	   sort_stack.c \
 	   big_sort.c \
 	   algo_in.c \
-	   algo_out.c \
-	   optimise_out.c \
+	   optimise_out_1.c \
+	   optimise_out_2.c \
+	   index_cost.c \
+	   convert_av.c \
+	   help_sort_3.c \
+	   calculate_target.c \
+	   calc_cost.c \
+	   move_nodes.c \
+	   stack_methods_4.c \
        ./libft/ft_isalpha.c ./libft/ft_isprint.c ./libft/ft_memcmp.c  ./libft/ft_putchar_fd.c ./libft/ft_split.c \
 	./libft/ft_strlcat.c ./libft/ft_strncmp.c ./libft/ft_substr.c ./libft/ft_atoi.c ./libft/ft_isalnum.c \
 	./libft/ft_itoa.c ./libft/ft_memcpy.c  ./libft/ft_putendl_fd.c ./libft/ft_strchr.c  ./libft/ft_strlcpy.c \
@@ -31,17 +40,17 @@ SRCS = ./libft/printf/ft_printf.c \
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = push_swap
 
 all: $(NAME)
 
-$(NAME): $(SRCS)
-	@$(CC) $(CFLAGS) -o $(NAME) $(SRCS)
+$(NAME): $(SRCS) push_swap.h ./libft/libft.h ./libft/printf/ft_printf.h
+	$(CC) $(CFLAGS) -o $(NAME) $(SRCS)
 
 clean:
-	@$(RM) $(NAME)
+	$(RM) $(NAME)
 
 re: clean all
 

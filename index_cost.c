@@ -1,25 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algo_in.c                                          :+:      :+:    :+:   */
+/*   index_cost.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 04:56:27 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/06 05:54:15 by mel-houd         ###   ########.fr       */
+/*   Created: 2024/01/06 04:10:31 by mel-houd          #+#    #+#             */
+/*   Updated: 2024/01/06 04:14:02 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	algo_in(t_stack *a, t_stack *b, int *big_3)
+void	index_cost_helper(t_stack *stack)
 {
-	while (a->size > 3)
+	t_node	*list;
+	int		i;
+
+	list = stack->items;
+	i = 0;
+	while (list)
 	{
-		index_cost(&a, &b);
-		calculate_target(&a, &b, big_3);
-		calculate_cost_action(&a, &b, big_3);
-		movement_of_nodes(a, b);
-		clear_target(a, b);
+		list->index = i;
+		if (i <= stack->size / 2)
+			list->cost = i;
+		else
+			list->cost = stack->size - i;
+		list = list->next;
+		i++;
 	}
+}
+
+void	index_cost(t_stack **a_p, t_stack **b_p)
+{
+	t_stack	*a;
+	t_stack	*b;
+
+	a = *a_p;
+	b = *b_p;
+	index_cost_helper(a);
+	index_cost_helper(b);
 }
