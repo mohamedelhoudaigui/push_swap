@@ -1,4 +1,3 @@
-# Source files
 SRCS = ./libft/printf/ft_printf.c \
        ./libft/printf/ft_printf_hex.c \
        ./libft/printf/ft_printf_pointer.c \
@@ -36,22 +35,45 @@ SRCS = ./libft/printf/ft_printf.c \
 	./libft/ft_lstdelone_bonus.c ./libft/ft_lstiter_bonus.c ./libft/ft_lstlast_bonus.c \
 	./libft/ft_lstmap_bonus.c ./libft/ft_lstnew_bonus.c ./libft/ft_lstsize_bonus.c ./libft/ft_atol.c \
 
+OBJS = $(SRCS:.c=.o)
 
-
-# Compiler and flags
 CC = cc
+
 CFLAGS = -Wall -Wextra -Werror
+
+LIBFT = make -C libft
+
+PRINTF = make -C libft/printf
 
 NAME = push_swap
 
 all: $(NAME)
 
-$(NAME): $(SRCS) push_swap.h ./libft/libft.h ./libft/printf/ft_printf.h
-	$(CC) $(CFLAGS) -o $(NAME) $(SRCS)
+libs:
+	$(LIBFT)
+	$(PRINTF)
+
+$(NAME): $(OBJS) libs 
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -Llibft -lft -Llibft/printf -lftprintf
+
+%.o: %.c push_swap.h ./libft/libft.h ./libft/printf/ft_printf.h
+	echo "Building $<..."
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(NAME)
+	echo "Removing all object files..."
+	$(RM) $(OBJS)
+	$(LIBFT) clean
+	$(PRINTF) clean
 
-re: clean all
+fclean: clean
+	@echo "Removing executable and libs..."
+	$(RM) $(NAME)
+	$(LIBFT) fclean
+	$(PRINTF) fclean
+
+re: fclean all
 
 .PHONY: clean
+
+.SILENT:
