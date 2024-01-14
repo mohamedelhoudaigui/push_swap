@@ -6,11 +6,25 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:16:54 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/06 04:04:20 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/12 02:55:05 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	check_digits(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (arg[i] >= '0' && arg[i] <= '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	ft_check_sorted(int	*data, int size)
 {
@@ -24,6 +38,23 @@ int	ft_check_sorted(int	*data, int size)
 		i++;
 	}
 	return (0);
+}
+
+int	moded_ft_strlen(char *str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str[i] == '0')
+		i++;
+	j = 0;
+	while (str[i])
+	{
+		j++;
+		i++;
+	}
+	return (j);
 }
 
 t_node	*get_biggest(t_stack *stack)

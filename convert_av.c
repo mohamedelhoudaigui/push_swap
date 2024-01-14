@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:02:55 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/05 17:42:39 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/12 02:49:14 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	**allocate_memory(int size)
 	return (res);
 }
 
-void	fill_data(char **splited, int *data, int size)
+int	fill_data(char **splited, int *data, int size)
 {
 	int			i;
 	long long	tmp;
@@ -44,11 +44,17 @@ void	fill_data(char **splited, int *data, int size)
 	while (i < size)
 	{
 		tmp = ft_atol(splited[i]);
+		if (moded_ft_strlen(splited[i]) > 12)
+		{
+			free(data);
+			return (1);
+		}
 		if (tmp > 2147483647 || tmp < -2147483648)
-			return ;
+			return (1);
 		data[i] = (int)tmp;
 		i++;
 	}
+	return (0);
 }
 
 int	**ft_convert_av(char *full_args)
@@ -64,11 +70,15 @@ int	**ft_convert_av(char *full_args)
 	res = allocate_memory(size);
 	if (!res)
 	{
-		free(full_args);
 		ft_free_2d(splited);
 		return (NULL);
 	}
-	fill_data(splited, res[0], size);
+	if (fill_data(splited, res[0], size) == 1)
+	{
+		free(res);
+		ft_free_2d(splited);
+		return (NULL);
+	}
 	res[1] = &size;
 	res[2] = NULL;
 	free(full_args);

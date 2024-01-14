@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:23:30 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/07 09:02:55 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/09 01:01:49 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,6 @@ int	main(int ac, char **av)
 		if (sorted == 0)
 			return (0);
 		push_swap(&data_ar);
-	}
-	else
-	{
-		write(2, "Error\n", 6);
-		return (1);
 	}
 	return (0);
 }

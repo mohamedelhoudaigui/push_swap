@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:24:12 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/07 09:01:21 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/12 02:47:30 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_stack
 }				t_stack;
 
 int		*make_array(t_stack *head);
-int		*find_3_largest(int arr[], int size);
+int		*find_3_largest(int *arr, int size);
 int		check_exist(int *big_3, int value);
 void	init_stacks(t_stack *a, t_stack *b, int size, int *data);
 void	free_stack(t_stack *stack);
@@ -60,7 +60,7 @@ void	movement_of_nodes(t_stack *a, t_stack *b);
 void	algo_in(t_stack *a, t_stack *b, int *big_3);
 void	finish_touch_in(t_stack *b);
 int		*get_big_3(t_stack *a);
-void	bubble_sort(int arr[], int n);
+void	bubble_sort(int *arr, int n);
 void	swap(int *xp, int *yp);
 t_node	*get_smallest(t_stack *stack);
 t_node	*get_biggest(t_stack *stack);
@@ -77,10 +77,12 @@ int		ft_check_dups(int *data, int size);
 int		ft_check_sorted(int	*data, int size);
 int		get_size(char **splited);
 int		**allocate_memory(int size);
-void	fill_data(char **splited, int *data, int size);
+int		fill_data(char **splited, int *data, int size);
 void	move_a(t_stack *a, t_node *cheap_node);
 void	move_b(t_stack *a, t_stack *b, t_node *cheap_node, t_node *target);
 t_node	*get_cheap_node(t_stack *a);
+int		check_digits(char *arg);
+int		moded_ft_strlen(char *str);
 
 void	sa(t_stack *a);
 void	sb(t_stack *b);

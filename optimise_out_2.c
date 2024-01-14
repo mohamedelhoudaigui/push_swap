@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 03:53:12 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/06 04:00:18 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/12 02:01:03 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	update_result(int value, int *result)
 	}
 }
 
-int	*find_3_largest(int arr[], int size)
+int	*find_3_largest(int *arr, int size)
 {
 	int	*result;
 	int	i;

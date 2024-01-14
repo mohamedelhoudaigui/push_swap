@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 05:20:31 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/06 07:40:22 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/12 02:18:28 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	ft_check_intruder(char *str)
 	{
 		if (str[i] == '+' || str[i] == '-')
 		{
-			if (str[i + 1] < '0' || str[i + 1] > '9')
+			if (str[i + 1] < '0' || str[i + 1] > '9'
+				|| (i != 0 && str[i - 1] != ' '))
 				return (1);
 		}
 		i++;
@@ -61,6 +62,8 @@ char	*concatenate_arguments(char **av, int ac)
 	while (i < ac)
 	{
 		if (av[i][0] == '\0')
+			return (NULL);
+		if (check_digits(av[i]) == 1)
 			return (NULL);
 		tmp = full_args;
 		full_args = ft_strjoin(tmp, av[i]);

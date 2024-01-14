@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   optimise_out.c                                     :+:      :+:    :+:   */
+/*   optimise_out_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 00:36:09 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/06 03:53:29 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/12 02:02:10 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	swap(int *xp, int *yp)
 	*yp = temp;
 }
 
-void	bubble_sort(int arr[], int n)
+void	bubble_sort(int *arr, int n)
 {
 	int	swapped;
 	int	i;
