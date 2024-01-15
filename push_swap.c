@@ -6,19 +6,41 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:23:30 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/09 01:01:49 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/15 06:47:12 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_data_ar(int **data_ar)
+int	check_sorted(int **res)
 {
-	int	*data;
+	int	i;
 
-	data = data_ar[0];
-	free(data);
-	free(data_ar);
+	if (!res)
+		return (1);
+	i = 0;
+	while (i < *res[1])
+	{
+		if (i == *res[1] - 1)
+			break ;
+		if (res[0][i] > res[0][i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	f(void)
+{
+	system("leaks push_swap");
+}
+
+void	free_res(int **res)
+{
+	free(res[0]);
+	free(res[1]);
+	free(res);
+	res = NULL;
 }
 
 void	push_swap(int ***data_p)
@@ -38,51 +60,27 @@ void	push_swap(int ***data_p)
 	sort_stack(a, b);
 	free_stack(a);
 	free_stack(b);
-	free_data_ar(data_ar);
-}
-
-int	**parser(char	**av, int ac)
-{
-	char	*res;
-	int		dup;
-	int		**data_ar;
-
-	res = ft_parser(av, ac);
-	if (!res)
-		return (NULL);
-	data_ar = ft_convert_av(res);
-	if (!data_ar)
-	{
-		free(res);
-		return (NULL);
-	}
-	dup = ft_check_dups(data_ar[0], *(data_ar[1]));
-	if (dup == 1)
-	{
-		free(data_ar[0]);
-		free(data_ar);
-		return (NULL);
-	}
-	return (data_ar);
+	free_res(data_ar);
 }
 
 int	main(int ac, char **av)
 {
 	int		**data_ar;
-	int		sorted;
 
-	if (ac >= 2)
+	atexit(f);
+	if (ac < 2)
+		return (0);
+	data_ar = parser(av);
+	if (data_ar == NULL)
 	{
-		data_ar = parser(av, ac);
-		if (data_ar == NULL)
-		{
-			write(2, "Error\n", 6);
-			return (1);
-		}
-		sorted = ft_check_sorted(data_ar[0], *(data_ar[1]));
-		if (sorted == 0)
-			return (0);
-		push_swap(&data_ar);
+		write(2, "Error\n", 6);
+		return (1);
 	}
+	if (check_sorted(data_ar) == 1)
+	{
+		free_res(data_ar);
+		return (0);
+	}
+	push_swap(&data_ar);
 	return (0);
 }

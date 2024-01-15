@@ -6,38 +6,35 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:16:54 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/12 02:55:05 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/15 06:46:09 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_digits(char *arg)
+void	free_split(char **split)
 {
 	int	i;
 
-	i = 0;
-	while (arg[i])
-	{
-		if (arg[i] >= '0' && arg[i] <= '9')
-			return (0);
-		i++;
-	}
-	return (1);
+	i = -1;
+	while (split[++i])
+		free(split[i]);
+	free(split);
+	split = NULL;
 }
 
-int	ft_check_sorted(int	*data, int size)
+void	*check_atoi(char *str, char **split, int **res)
 {
-	int	i;
+	long	num;
 
-	i = 0;
-	while (i < size - 1)
+	num = ft_atoi(str);
+	if (num > INT32_MAX || num < INT32_MIN)
 	{
-		if (data[i] > data[i + 1])
-			return (1);
-		i++;
+		free_split(split);
+		free_res(res);
+		return (NULL);
 	}
-	return (0);
+	return ((void *)1);
 }
 
 int	moded_ft_strlen(char *str)
@@ -45,6 +42,8 @@ int	moded_ft_strlen(char *str)
 	int	i;
 	int	j;
 
+	if (str[0] == '0' && str[1] == '\0')
+		return (1);
 	i = 0;
 	while (str[i] == '0')
 		i++;

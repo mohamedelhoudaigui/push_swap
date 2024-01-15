@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:24:12 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/12 02:47:30 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/15 06:19:03 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,26 @@ t_node	*check_no_target(t_stack *a, int *big_3);
 int		*find_min(t_node *head);
 void	push_min(t_stack *a, t_stack *b);
 void	print_stack(t_stack *stack);
-char	*ft_parser(char **av, int ac);
-int		ft_check_intruder(char *str);
 void	push_swap(int ***data_ar);
-int		**ft_convert_av(char *full_args);
-void	ft_free_2d(char **av);
-int		ft_check_dups(int *data, int size);
-int		ft_check_sorted(int	*data, int size);
-int		get_size(char **splited);
-int		**allocate_memory(int size);
-int		fill_data(char **splited, int *data, int size);
 void	move_a(t_stack *a, t_node *cheap_node);
 void	move_b(t_stack *a, t_stack *b, t_node *cheap_node, t_node *target);
 t_node	*get_cheap_node(t_stack *a);
-int		check_digits(char *arg);
 int		moded_ft_strlen(char *str);
+
+int		check_number(char *str);
+int		check_intruder(char *str);
+int		check_args(char **av);
+void	free_res(int **res);
+int		**parser(char **av);
+void	*check_atoi(char *str, char **split, int **res);
+
+int		calculate_len(char **av);
+int		check_num_len(char **str);
+void	free_split(char **split);
+int		check_len(char **av);
+int		**get_data(char **av, int len);
+int		check_sorted(int **res);
+int		check_multi(int **args);
 
 void	sa(t_stack *a);
 void	sb(t_stack *b);

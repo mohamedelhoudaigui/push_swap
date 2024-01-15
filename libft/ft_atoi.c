@@ -6,32 +6,17 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 17:05:55 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/12/07 13:47:09 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/01/15 06:45:26 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	check_max(int sign, unsigned long long res)
+long long	ft_atoi(const char *str)
 {
-	if (res > 9223372036854775807 && sign == 1)
-	{
-		res = -1;
-		return ((int)res);
-	}
-	else if (res > 9223372036854775807 && sign == -1)
-	{
-		res = 0;
-		return ((int)res);
-	}
-	return ((int)(res * sign));
-}
-
-int	ft_atoi(const char *str)
-{
-	int					i;
-	unsigned long long	res;
-	int					sign;
+	int			i;
+	long long	res;
+	int			sign;
 
 	i = 0;
 	res = 0;
@@ -48,5 +33,5 @@ int	ft_atoi(const char *str)
 		i++;
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 		res = (str[i++] - '0') + (res * 10);
-	return (check_max(sign, res));
+	return (sign * res);
 }
