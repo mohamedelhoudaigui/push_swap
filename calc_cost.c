@@ -62,11 +62,10 @@ t_node	*find_cheap_node(t_stack *a, int *big_3)
 void	calculate_cost_action(t_stack **a_p, t_stack **b_p, int *big_3)
 {
 	t_stack	*a;
-	t_stack	*b;
 	t_node	*cheap_node;
 
+	(void)b_p;
 	a = *a_p;
-	b = *b_p;
 	cheap_node = find_cheap_node(a, big_3);
 	if (cheap_node != NULL)
 		cheap_node->cheap = true;

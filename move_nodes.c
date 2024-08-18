@@ -88,6 +88,8 @@ void	movement_of_nodes(t_stack *a, t_stack *b)
 
 	a_list = a->items;
 	b_list = b->items;
+	(void)a_list;
+	(void)b_list;
 	cheap_node = get_cheap_node(a);
 	if (cheap_node == NULL)
 		return ;
