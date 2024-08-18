@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 21:12:38 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/12 00:44:56 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/08/18 02:38:41 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdarg.h>
+# include <stdint.h>
 
 int		ft_printf(const char *s, ...);
 
