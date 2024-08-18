@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 21:59:04 by mel-houd          #+#    #+#             */
-/*   Updated: 2023/11/09 11:03:24 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/08/18 02:36:15 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,9 @@ static char	*malloc_space(size_t size)
 
 static char	*concate_strings(char const *s1, char const *s2, char *res)
 {
-	char		*d1;
-	char		*d2;
 	size_t		i;
 	size_t		j;
 
-	d1 = (char *)s1;
-	d2 = (char *)s2;
 	i = 0;
 	j = 0;
 	while (s1[i])
