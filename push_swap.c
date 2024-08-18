@@ -6,7 +6,7 @@
 /*   By: mel-houd <mel-houd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:23:30 by mel-houd          #+#    #+#             */
-/*   Updated: 2024/01/15 06:47:12 by mel-houd         ###   ########.fr       */
+/*   Updated: 2024/08/18 02:30:01 by mel-houd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ int	check_sorted(int **res)
 		i++;
 	}
 	return (1);
-}
-
-void	f(void)
-{
-	system("leaks push_swap");
 }
 
 void	free_res(int **res)
@@ -67,7 +62,6 @@ int	main(int ac, char **av)
 {
 	int		**data_ar;
 
-	atexit(f);
 	if (ac < 2)
 		return (0);
 	data_ar = parser(av);
